@@ -10,7 +10,8 @@ from report_generator import *
 
 
 app = FastAPI()
-logo_path = "C:\\Users\\ange.kadjafomekon\\OneDrive - AGM Solutions\\Desktop\\motore_libreria\\book_report\\static\\agm_solutions_2.png"
+#logo_path = "C:\\Users\\ange.kadjafomekon\\OneDrive - AGM Solutions\\Desktop\\motore_libreria\\book_report\\static\\agm_solutions_2.png"
+logo_path = "C:\\Users\\ange.kadjafomekon\\OneDrive - AGM Solutions\\Desktop\\motore_libreria\\book_report\\static\\agm_solutions.png"
 # On charge le fichier CSV une seule fois
 df = load_dataset()
 
@@ -18,6 +19,17 @@ df = load_dataset()
 @app.get("/")
 def lire_racine():
     return {"message": "Bienvenue !"}
+
+@app.get("/report/author")
+def report_author(author: str):
+    try:
+        pdf_bytes = generate_author_report(df, author,logo_path)
+        return StreamingResponse(BytesIO(pdf_bytes),
+                                 media_type="application/pdf",
+                                 headers={"Content-Disposition": f"attachment; filename=rapport_publisher_{author}.pdf"})
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
 
 @app.get("/report/publisher")
 def report_publisher(publisher: str):
@@ -32,7 +44,7 @@ def report_publisher(publisher: str):
 @app.get("/report/category")
 def report_category(category: str):
     try:
-        pdf_bytes = generate_category_report(df, category)
+        pdf_bytes = generate_category_report(df, category, logo_path)
         return StreamingResponse(BytesIO(pdf_bytes),
                                  media_type="application/pdf",
                                  headers={"Content-Disposition": f"attachment; filename=rapport_categorie_{category}.pdf"})
@@ -41,7 +53,7 @@ def report_category(category: str):
 
 @app.get("/report/full")
 def report_full():
-    pdf_bytes = generate_full_archive_report(df)
+    pdf_bytes = generate_full_archive_report(df, logo_path)
     return StreamingResponse(BytesIO(pdf_bytes),
                              media_type="application/pdf",
                              headers={"Content-Disposition": "attachment; filename=rapport_complet.pdf"})
