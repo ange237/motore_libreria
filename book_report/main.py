@@ -12,7 +12,7 @@ from report_generator import *
 app = FastAPI()
 #logo_path = "C:\\Users\\ange.kadjafomekon\\OneDrive - AGM Solutions\\Desktop\\motore_libreria\\book_report\\static\\agm_solutions_2.png"
 logo_path = "C:\\Users\\ange.kadjafomekon\\OneDrive - AGM Solutions\\Desktop\\motore_libreria\\book_report\\static\\agm_solutions.png"
-# On charge le fichier CSV une seule fois
+# prima si carica il dataset
 df = load_dataset()
 
 

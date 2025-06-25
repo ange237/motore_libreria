@@ -19,4 +19,4 @@ nel nostro progetto, useremmo :
 -fpdf2 per la generazione dei report in formato pdf
 -pandas, numpy e matplotlib per la gestione dati e generazione dei grafici
 
-# struttura del progetto:
+

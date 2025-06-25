@@ -2,7 +2,7 @@
 import pandas as pd
 #from app.config import CSV_PATH 
 
-#funzione per caricare il CSV in un DataFrame e ritornare il DataFrame
+#funzione per caricare il file CSV in un DataFrame e ritornare il DataFrame
 def load_dataset():
     try:
       df = pd.read_csv("C:\\Users\\ange.kadjafomekon\\OneDrive - AGM Solutions\\Desktop\\motore_libreria\\book_report\\data\\dataset_progetto_pulito.csv")
